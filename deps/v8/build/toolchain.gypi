@@ -923,12 +923,18 @@
               }],
             ],
             'xcode_settings': {
-              'ARCHS': [ 'i386' ],
+              'conditions': [
+                [ 'v8_target_arch=="arm"', {
+                  'ARCHS': [ 'armv7' ],
+                }, {
+                  'ARCHS': [ 'i386' ],
+                }],
+              ]
             },
           }],
         ],
       }],
-      ['(OS=="linux" or OS=="android") and \
+      ['(OS=="linux" or OS=="mac" or OS=="android") and \
         (v8_target_arch=="x64" or v8_target_arch=="arm64" or \
          v8_target_arch=="ppc64")', {
         'target_conditions': [
@@ -938,7 +944,10 @@
                 'cflags': [ '-m64' ],
                 'ldflags': [ '-m64' ]
               }],
-             ],
+            ],
+            'xcode_settings': {
+              'ARCHS': [ 'x86_64' ],
+            },
            }],
            ['_toolset=="target"', {
              'conditions': [
@@ -946,7 +955,22 @@
                  'cflags': [ '-m64' ],
                  'ldflags': [ '-m64' ],
                }],
-             ]
+               # Enable feedback-directed optimisation when building in android.
+               [ 'android_webview_build == 1', {
+                 'aosp_build_settings': {
+                   'LOCAL_FDO_SUPPORT': 'true',
+                 },
+               }],
+             ],
+             'xcode_settings': {
+               'conditions': [
+                 [ 'v8_target_arch=="arm64"', {
+                   'ARCHS': [ 'arm64' ],
+                 }, {
+                   'ARCHS': [ 'x86_64' ],
+                 }],
+               ]
+             },
            }],
          ],
       }],
