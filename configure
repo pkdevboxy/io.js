@@ -25,8 +25,8 @@ import nodedownload
 # parse our options
 parser = optparse.OptionParser()
 
-valid_os = ('win', 'mac', 'solaris', 'freebsd', 'openbsd', 'linux', 'android')
-valid_arch = ('arm', 'arm64', 'ia32', 'mips', 'mipsel', 'x32', 'x64', 'x86')
+valid_os = ('win', 'mac', 'ios', 'solaris', 'freebsd', 'openbsd', 'linux', 'android')
+valid_arch = ('arm', 'arm64', 'ia32', 'mips', 'mipsel', 'x32', 'x64', 'x64')
 valid_arm_float_abi = ('soft', 'softfp', 'hard')
 valid_mips_arch = ('loongson', 'r1', 'r2', 'r6', 'rx')
 valid_mips_fpu = ('fp32', 'fp64', 'fpxx')
