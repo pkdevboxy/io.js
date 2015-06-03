@@ -31,7 +31,7 @@
         'os_posix': 1,
         'v8_postmortem_support%': 'true',
       }],
-      ['GENERATOR == "ninja" or OS== "mac"', {
+      ['GENERATOR == "ninja" or OS == "mac" or OS == "ios"', {
         'OBJ_DIR': '<(PRODUCT_DIR)/obj',
         'V8_BASE': '<(PRODUCT_DIR)/libv8_base.a',
       }, {
@@ -43,7 +43,7 @@
       }, {
         'OPENSSL_PRODUCT': 'libopenssl.a',
       }],
-      ['OS=="mac"', {
+      ['OS == "mac" or OS == "ios"', {
         'clang%': 1,
       }, {
         'clang%': 0,
@@ -257,7 +257,7 @@
           'GCC_ENABLE_PASCAL_STRINGS': 'NO',        # No -mpascal-strings
           'GCC_THREADSAFE_STATICS': 'NO',           # -fno-threadsafe-statics
           'PREBINDING': 'NO',                       # No -Wl,-prebind
-          'MACOSX_DEPLOYMENT_TARGET': '10.5',       # -mmacosx-version-min=10.5
+          'MACOSX_DEPLOYMENT_TARGET': '10.7',       # -mmacosx-version-min=10.5
           'USE_HEADERMAP': 'NO',
           'OTHER_CFLAGS': [
             '-fno-strict-aliasing',

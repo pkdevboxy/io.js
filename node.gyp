@@ -286,7 +286,7 @@
                 '<(SHARED_INTERMEDIATE_DIR)/node_dtrace_provider.o'
               ],
             }],
-            [ 'OS!="mac" and OS!="linux"', {
+            [ 'OS!="mac" and OS!="ios" and OS!="linux"', {
               'sources': [
                 'src/node_dtrace_ustack.cc',
                 'src/node_dtrace_provider.cc',
@@ -366,6 +366,18 @@
           'libraries': [ '-lpsapi.lib' ]
         }, { # POSIX
           'defines': [ '__POSIX__' ],
+        }],
+        [ 'OS=="ios"', {
+          # linking Corefoundation is needed since certain OSX debugging tools
+          # like Instruments require it for some features
+          'libraries': [ '-framework CoreFoundation' ],
+          'defines!': [
+            'NODE_PLATFORM="ios"',
+          ],
+          'defines': [
+            # we need to use node's preferred "darwin" rather than gyp's preferred "mac"
+            'NODE_PLATFORM="darwin"',
+          ],
         }],
         [ 'OS=="mac"', {
           # linking Corefoundation is needed since certain OSX debugging tools
@@ -526,7 +538,7 @@
       'target_name': 'node_dtrace_provider',
       'type': 'none',
       'conditions': [
-        [ 'node_use_dtrace=="true" and OS!="mac" and OS!="linux"', {
+        [ 'node_use_dtrace=="true" and OS!="ios" and OS!="mac" and OS!="linux"', {
           'actions': [
             {
               'action_name': 'node_dtrace_provider_o',
@@ -561,7 +573,7 @@
       'target_name': 'node_dtrace_ustack',
       'type': 'none',
       'conditions': [
-        [ 'node_use_dtrace=="true" and OS!="mac" and OS!="linux"', {
+        [ 'node_use_dtrace=="true" and OS!="mac" and OS!="ios" and OS!="linux"', {
           'actions': [
             {
               'action_name': 'node_dtrace_ustack_constants',

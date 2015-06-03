@@ -246,7 +246,7 @@
                   }],
                   [ 'arm_version==7 or arm_version=="default"', {
                     'conditions': [
-                      [ 'arm_fpu!="default"', {
+                      [ 'OS!="ios" and arm_fpu!="default"', {
                         'cflags': ['-mfpu=<(arm_fpu)',],
                       }],
                     ],
