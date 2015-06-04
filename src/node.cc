@@ -71,8 +71,12 @@ typedef int mode_t;
 #endif
 
 #ifdef __APPLE__
+#ifdef __IPHONE_2_0
+extern char **environ;
+#else
 #include <crt_externs.h>
 #define environ (*_NSGetEnviron())
+#endif
 #elif !defined(_MSC_VER)
 extern char **environ;
 #endif
