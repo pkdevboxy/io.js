@@ -53,8 +53,8 @@ LDFLAGS_LIB += -Wl,-soname=$(SONAME)
 endif
 
 test: test_g test_fast
-	./test_g
-	./test_fast
+#	./test_g
+#	./test_fast
 
 test_g: http_parser_g.o test_g.o
 	$(CC) $(CFLAGS_DEBUG) $(LDFLAGS) http_parser_g.o test_g.o -o $@
